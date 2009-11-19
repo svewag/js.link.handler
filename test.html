@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<script>
+	$(document).ready(function(){
+		var buttonClick = function(button, e){
+			e.preventDefault();
+			
+			var button = $(button);
+			
+			var handler = button.attr("onclick");
+			var ret = true;
+			if(handler){
+				ret = handler.call(button, e);
+			}
+			
+			if(ret){
+				var href = button.attr("href");
+				if(href){
+					document.location.href = href;
+				}
+			}
+		}
+		
+		$(document).keydown(function(e){
+			if(e.keyCode == 13){
+				var button = $("a:first");
+				buttonClick(button, e);
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<a style="font-size:150px;" href="javascript:alert('href called')" onclick="alert('onclick called'); return false;">click</a>
+</body>
+</html>
